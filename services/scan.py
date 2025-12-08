@@ -1,4 +1,4 @@
-from models import db, Scan, Resultat
+from models import db, Scan, Resultat, Ip
 import re
 
 def saveUploadFile(files):
@@ -44,6 +44,15 @@ def analyzeFile(pathFile, scanId):
             hostUp = True
             ipStatus = "EN LIGNE"
             print("Host up:", currentIp)
+
+            ip = Ip(ip = currentIp,
+                    ip_status = ipStatus,
+                    scan_id = scanId
+                    )
+
+            db.session.add(ip)
+            db.session.commit()
+
             continue 
         
         if currentIp and hostUp:
@@ -56,12 +65,12 @@ def analyzeFile(pathFile, scanId):
                 service = port_match.group(4)
 
                 resultat = Resultat(
-                    ip = currentIp,
-                    ip_status = ipStatus,
                     service = service,
                     port = f"{port}/{protocol}",
                     status = status, 
-                    scan_id = scanId
+                
+                    scan_id = scanId,
+                    ip_id = ip.id
                 )
                 
                 db.session.add(resultat)

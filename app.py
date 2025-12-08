@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for # type: ignore
 from bdd_config import Config
-from models import db, Resultat, Scan
+from models import db, Resultat, Scan, Ip
 from services import scan
 
 app = Flask(__name__)
@@ -14,11 +14,13 @@ with app.app_context():
 @app.route("/")
 def home():
     scans = Scan.query.order_by(Scan.id.desc()).all()
-    resultats = Resultat.query.all()
+
+    #resultats = Resultat.query.all()
+    ips = Ip.query.all()
 
     return render_template("index.html", 
-                           scans = scans, 
-                           resultats = resultats
+                           scans = scans,
+                           ips = ips
                            )
 
 

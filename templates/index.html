@@ -13,13 +13,6 @@
 <body>
 
     <div class="container-televerser">
-
-        <p> 
-            {% if message %}
-                {{ message }}
-            {% endif %}
-        </p>
-
         <select id="fichier-select">
             <option value="" selected disabled>Fichier nmap</option>
 
@@ -47,13 +40,10 @@
 
         <table>
             <tbody>
-                {% for resultat in resultats %}
+                {% for ip in ips %}
                 <tr>
-                    <td>{{ resultat.ip }}</td>
-                    <td>{{ resultat.ip_status }}</td>
-                    <td>{{ resultat.port }}</td>
-                    <td>{{ resultat.service }}</td>
-                    <td>{{ resultat.version }}</td>
+                    <td>{{ ip.ip }}</td>
+                    <td>{{ ip.ip_status }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
