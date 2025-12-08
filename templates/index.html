@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nmap Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script src="{{ url_for('static', filename='index.js') }}"> </script>
+</head>
+
+
+<body>
+
+    <div class="container-televerser">
+
+        <p> 
+            {% if message %}
+                {{ message }}
+            {% endif %}
+        </p>
+
+        <select id="fichier-select">
+            <option value="" selected disabled>Fichier nmap</option>
+
+             <!-- Binding des resultats fichiers depuis la BDD -->
+
+            {% for scan in scans %}
+                <option value="{{ scan.id }}">{{ scan.filename }}</option>
+            {% endfor %}
+
+        </select>
+        
+
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" id="file-input" name="file" accept=".txt,.xml,.nmap" multiple required>
+            <button type="submit" id="televerser-btn">Téléverser</button>
+        </form>
+
+    
+    </div>
+
+
+    <div class="container-resultat">
+
+        <!-- Affichage en liste des resultats -->
+
+        <table>
+            <tbody>
+                {% for resultat in resultats %}
+                <tr>
+                    <td>{{ resultat.ip }}</td>
+                    <td>{{ resultat.ip_status }}</td>
+                    <td>{{ resultat.port }}</td>
+                    <td>{{ resultat.service }}</td>
+                    <td>{{ resultat.version }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+    </div>  
+
+
+</html>
