@@ -43,12 +43,11 @@ def analyzeFile(pathFile, scanId):
         if currentIp and "Host is up" in line:
             hostUp = True
             ipStatus = "EN LIGNE"
-            print("Host up:", currentIp)
+            print("Host up : ", currentIp)
 
             ip = Ip(ip = currentIp,
                     ip_status = ipStatus,
-                    scan_id = scanId
-                    )
+                    scan_id = scanId)
 
             db.session.add(ip)
             db.session.commit()
@@ -87,6 +86,25 @@ def analyzeFile(pathFile, scanId):
 
     print("Analysis Results:", analysis_results)
 
-               
 
+def getIps(scanId):
+    ips = Ip.query.filter_by(scan_id=scanId).all()
+
+    ip_results = []
+
+    for ip in ips:
+        ip_results.append(ip)
+        print(ip.ip, ip.ip_status)
+    
+    return ip_results
+
+
+def getIpAndResults(scanId, ipId):
+    ip = Ip.query.filter_by(scan_id=scanId, id=ipId).first()
+    results = Resultat.query.filter_by(ip_id = ip.id).all()
+
+    print("Resultat IP : ", ip.ip)
+    for res in results:
+        print(res.service, res.port, res.status)
         
+    return results

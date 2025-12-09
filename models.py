@@ -8,7 +8,7 @@ class Scan(db.Model):
 
 class Ip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    ip = db.Column(db.String(15), nullable=False, unique=True)
+    ip = db.Column(db.String(15), nullable=False)
     ip_status = db.Column(db.String(20), nullable=False)
 
     scan_id = db.Column(db.Integer, db.ForeignKey('scan.id'), nullable=False)
