@@ -3,29 +3,29 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nmap Analyzer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resultat.css') }}">
     <script src="{{ url_for('static', filename='index.js') }}"> </script>
 </head>
 
 
 <body>
 
+    <!-- Premier composant : liste des fichiers scan nmap et téléversement -->
     <div class="container-televerser">
         <select id="fichier-select">
             <option value="" disabled {% if not selectedScanId %} selected {% endif %}>
                 Fichier nmap
             </option>
-        
+
             {% for scan in scans %}
-                <option value="{{ scan.id }}"
-                    {% if selectedScanId == scan.id %} selected {% endif %}>
-                    {{ scan.filename }}
-                </option>
+            <!-- Sélectionner le nom du scan sélectionné  -->
+            <option value="{{ scan.id }}" {% if selectedScanId==scan.id %} selected {% endif %}>
+                {{ scan.filename }}
+            </option>
             {% endfor %}
         </select>
-        
 
         <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" id="file-input" name="file" accept=".txt,.xml,.nmap" multiple required>
@@ -34,44 +34,41 @@
     </div>
 
 
+    <!-- Deuxième composant : liste des IPs et détails des résultats -->
     <div class="container-result">
         <table id="result-table">
             <tbody>
                 {% for ip in ips %}
-                    <tr class="result-ip-header {% if selectedIpId == ip.id %}active{% endif %}" data-ip-id="{{ ip.id }}">
-                        <td>{{ ip.ip }}</td>
-                        <td>{{ ip.ip_status }}</td>
-                    </tr>
+                <tr class="result-ip-header {% if selectedIpId == ip.id %} active {% endif %}" data-ip-id="{{ ip.id }}">
+                    <td>{{ ip.ip }}</td>
+                    <td>{{ ip.ip_status }}</td>
+                </tr>
 
-                    {% if selectedIpId == ip.id and resultats %}
-                    <tr class="result-details">
-                        <td colspan="2">
+                {% if selectedIpId == ip.id and resultats %}
+                <tr class="result-details">
+                    <td colspan="2">
 
-                            <div class="result-container">
-                                {% for res in resultats %}
+                        <div class="result-container">
+                            {% for res in resultats %}
 
-                                <div class="result-item">
-                                    <div class="result-content">
-                                        <span class="port-service">{{ res.service }}</span>
-                                        <span class="port-info">{{ res.port }}</span>
-                                    </div>
-                                    <span class="port-status"> {{ res.status }}</span>
+                            <div class="result-item {{ res.status }}">
+                                <div class="result-content">
+                                    <span class="port-service">{{ res.service }}</span>
+                                    <span class="port-info">{{ res.port }}</span>
                                 </div>
-
+                                <span class="port-status"> {{ res.status }}</span>
                             </div>
+
                             {% endfor %}
-                            
-                        </td>
-                    </tr>
-                    {% endif %}
-                {% endfor %}        
+                        </div>
+    
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
             </tbody>
         </table>
-    </div>  
-
-
+    </div>
 
 </body>
-
 </html>
-

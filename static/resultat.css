@@ -1,0 +1,113 @@
+:root {
+    /* Couleurs des bordures et textes */
+    --color-border: #333;
+    --color-blue-border: #4a90e2;
+    --color-green-text: #2d8a2d;
+    --color-yellow-text: #b58900; /* Ocre pour être lisible sur fond clair */
+    --color-red-text: #c0392b;
+
+    /* Couleurs de fond UNIES (Pastels) */
+    --color-blue-bg: #e6f2ff;
+    --color-green-bg: #e8f5e9;
+    --color-yellow-bg: #fff9c4;
+    --color-red-bg: #fc9494aa;
+}
+
+/* Conteneur principal */
+.container-result {
+    max-width: 700px;
+    margin: auto;
+    margin-top: 40px;
+}
+
+#result-table {
+    width: 100%;
+    border-spacing: 0; /* Pas d'espace entre les blocs IP */
+}
+
+/* --- Style des Lignes IP (Headers) --- */
+.result-ip-header td {
+    border-top: 2px solid var(--color-border);
+    border-bottom: 2px solid var(--color-border);
+    padding: 15px 20px;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+/* Fermeture des bordures gauche/droite */
+.result-ip-header td:first-child {
+    border-left: 2px solid var(--color-border);
+}
+.result-ip-header td:last-child {
+    border-right: 2px solid var(--color-border);
+    text-align: right;
+    color: var(--color-green-text); 
+}
+
+/* --- État Actif (L'IP sélectionnée) --- */
+.result-ip-header.active td {
+    border-color: var(--color-blue-border);
+    background-color: var(--color-blue-bg); /* Fond bleu uni */
+}
+
+/* --- Zone des résultats selon l'IP sélectionné (conteneur blanc ) --- */
+.result-details td {
+    padding: 0px 30px 0px 30px;
+}
+
+.result-container {
+    border: 2px solid var(--color-border);
+    border-top: none; 
+    background: white;
+    padding: 20px;
+}
+
+/* --- Les Items (Ports) --- */
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px; 
+}
+
+.result-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.port-info {
+    font-weight: normal;
+}
+
+.port-status {
+    text-transform: uppercase;
+}
+
+/* --- Couleurs conditionnelles des Ports (Fonds unis) --- */
+
+/* 1. OUVERT (Vert) */
+.result-item.open{
+    border-color: var(--color-green-text);
+    color: var(--color-green-text);
+    background-color: var(--color-green-bg);
+}
+
+/* 2. FILTRÉ (Jaune) */
+.result-item.filtered, .result-item.filtered{
+    border-color: var(--color-yellow-text);
+    color: var(--color-yellow-text);
+    background-color: var(--color-yellow-bg);
+}
+
+/* 3. FERMÉ (Rouge) */
+.result-item.closed, .result-item.closed {
+    border-color: var(--color-red-text);
+    color: var(--color-red-text);
+    background-color: var(--color-red-bg);
+}
