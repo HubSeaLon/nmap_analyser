@@ -3,7 +3,7 @@ Analyser des fichiers de scan nmap
 
 Uploadez un ou plusieurs fichiers, les résultats s'affichent sous forme de liste. Pour chaque IP ouverte, vous pouvez voir les détails des services présents. 
 
-![alt text](image.png)
+<img width="781" height="589" alt="Capture d’écran 2025-12-11 à 02 14 58" src="https://github.com/user-attachments/assets/a44eae68-26dd-49b9-b57a-2f2d85bddb7f" />
 
 ## Installation (Linux)
 
