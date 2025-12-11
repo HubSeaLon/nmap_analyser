@@ -1,9 +1,13 @@
 # nmap_analyser
 Analyser des fichiers de scan nmap
 
-Uploadez un ou plusieurs fichiers, les résultats s'affichent sous forme de liste. Pour chaque IP ouverte, vous pouvez voir les détails des services présents. 
+Uploadez un ou plusieurs fichiers, les résultats s'affichent sous forme de liste. Pour chaque IP ouverte, vous pouvez voir les détails des services présents.
 
 <img width="781" height="589" alt="Capture d’écran 2025-12-11 à 02 14 58" src="https://github.com/user-attachments/assets/a44eae68-26dd-49b9-b57a-2f2d85bddb7f" />
+
+Les résultats sont stockés en base de données SQLite sous le schéma suivant :
+
+<img width="502" height="492" alt="BDD nmap drawio" src="https://github.com/user-attachments/assets/058e4989-1fde-4680-8e66-4642444742ff" />
 
 ## Installation (Linux)
 
